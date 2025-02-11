@@ -8,7 +8,6 @@ if (APP_DEBUG) {
     ini_set('error_log', __DIR__ . '/../tmp/log/php-errors.log');
 }
 
-
 require_once __DIR__ . '/../config/core.php';
 require_once ROOT . '/vendor/autoload.php';
 require_once ROOT . '/helpers/helpers.php';
