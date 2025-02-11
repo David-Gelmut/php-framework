@@ -49,12 +49,10 @@ class Route
     {
         $path = $this->request->getPath();
         $route = $this->matchRoute($path);
-        if(!$route){
-           $this->response->setResponseCode(404);
-           echo 'Page not found';
-           die();
+        if (!$route) {
+            abort('Page not found');
         }
-        if(is_array($route['callback'])){
+        if (is_array($route['callback'])) {
             $route['callback'][0] = new $route['callback'][0];
         }
         return call_user_func($route['callback']);

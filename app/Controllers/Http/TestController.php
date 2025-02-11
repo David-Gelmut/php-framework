@@ -6,7 +6,7 @@ class TestController
 {
     public function index()
     {
-        return view()->render('test_view',['name'=>'test_data_view']);
+        return view('test', ['name' => 'Tom', 'age' => 25]);
     }
 
     public function store()
