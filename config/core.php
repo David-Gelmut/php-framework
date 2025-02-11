@@ -7,4 +7,5 @@ const SITE_URL = 'http://localhost:8000';
 const APP = ROOT . '/app';
 const CORE = ROOT . '/core';
 const VIEWS = ROOT . '/resources';
-const LAYOUT = 'default';
+const LAYOUTS = ROOT . '/resources/layouts';
+const RESOURCES = ROOT . '/resources';

@@ -19,7 +19,7 @@ class Application
         $this->request = new Request();
         $this->response = new Response();
         $this->route = new Route($this->request, $this->response);
-        $this->view = new View(LAYOUT);
+        $this->view = new View('default');
     }
 
     public function run(): void
