@@ -28,13 +28,18 @@
     ```
     php vendor/bin/phinx init
     ``` 
-   
-3. Создание миграции:
+3. Создаём папки:
+
+    ```
+    mk dir db/migrations
+    mk dir db/seeds
+    ```
+4. Создание миграции:
     ```
     php vendor/bin/phinx create CreateUserTable 
     ```
    
-4. Редактирование миграции в файле миграции класса миграции CreateUserTable в нашем случае для таблицы users :
+5. Редактирование миграции в файле миграции класса миграции CreateUserTable в нашем случае для таблицы users :
     ```
     public function up(): void
     {
@@ -56,7 +61,7 @@
     }
     ```
 
-5. Создадим связанную  внешним ключом user_id таблицу phones с таблицей users :
+6. Создадим связанную  внешним ключом user_id таблицу phones с таблицей users :
     ```
     public function up(): void
     {
@@ -80,12 +85,12 @@
     }
     ```
 
-6. Накатывание миграции для окружения development: 
+7. Накатывание миграции для окружения development: 
     ```
     php vendor/bin/phinx migrate -e development
     ```
    
-7. Откат миграции для окружения development: 
+8. Откат миграции для окружения development: 
     ```
     php vendor/bin/phinx rollback -e development
     ```
