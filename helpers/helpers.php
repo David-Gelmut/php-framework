@@ -1,6 +1,7 @@
 <?php
 
 use App\MVC\Application;
+use App\MVC\Database;
 use App\MVC\Request;
 use App\MVC\Route;
 use App\MVC\View;
@@ -44,4 +45,9 @@ function abort(string $error, int $code = 404): void
 function base_url($path = ''): string
 {
     return ROOT . $path;
+}
+
+function db(): Database
+{
+    return app()->database;
 }

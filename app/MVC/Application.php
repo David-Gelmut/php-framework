@@ -12,6 +12,7 @@ class Application
     public Route $route;
     public Response $response;
     public View $view;
+    public Database $database;
 
     public function __construct()
     {
@@ -20,6 +21,7 @@ class Application
         $this->response = new Response();
         $this->route = new Route($this->request, $this->response);
         $this->view = new View('default');
+        $this->database = new Database();
     }
 
     public function run(): void
