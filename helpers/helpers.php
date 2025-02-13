@@ -51,3 +51,57 @@ function db(): Database
 {
     return app()->database;
 }
+
+function session(): \App\MVC\Session
+{
+    return app()->session;
+}
+
+function get_alerts(): void
+{
+    app()->view->getAlerts();
+}
+
+function get_errors(mixed $fieldName): string
+{
+    return app()->view->getErrors($fieldName);
+}
+
+function old(mixed $fieldName): string
+{
+    return isset(session()->get('form_data')[$fieldName]) ? prepare_field(session()->get('form_data')[$fieldName]) : '';
+}
+
+function prepare_field(string $str): string
+{
+    return strip_tags(htmlspecialchars($str, ENT_QUOTES));
+}
+
+function set_validation_class(string $fieldname): string
+{
+    $errors = session()->get('form_errors');
+    if (empty($errors)) {
+        return '';
+    }
+    return isset($errors[$fieldname]) ? 'border-red-500' : 'border-green-500';
+}
+
+/*function get_csrf_field(): string
+{
+    return '<input type="hidden" name="csrf_token" value="' . session()->get('token') . '">';
+}
+
+function get_csrf_meta(): string
+{
+    return '<meta name="csrf-token" content="' . session()->get('token') . '">';
+}*/
+
+function get_csrf_token(): string
+{
+    return session()->get('csrf_token');
+}
+
+function env(string $key)
+{
+
+}

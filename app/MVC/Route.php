@@ -64,6 +64,19 @@ class Route
             if (
                 preg_match("#^{$route['path']}$#", "/{$path}", $matches) &&
                 in_array($this->request->getMethod(), $route['method'])) {
+                if (request()->isPost()) {
+                    if ($route['token'] && !$this->checkCsrfToken()) {
+                        if (request()->isAjax()) {
+                            echo json_encode([
+                                'status' => 'error',
+                                'data' => 'Access error'
+                            ]);
+                            die();
+                        } else {
+                            abort('Page expired', 419);
+                        }
+                    }
+                }
                 foreach ($matches as $k => $v) {
                     if (is_string($k)) {
                         $this->routeParams[$k] = $v;
@@ -73,5 +86,17 @@ class Route
             }
         }
         return false;
+    }
+
+    public function checkCsrfToken(): bool
+    {
+        $token = request()->post('token');
+        return $token && $token == session()->get('csrf_token');
+    }
+
+    public function withoutToken(): self
+    {
+        $this->routes[array_key_last($this->routes)]['token'] = false;
+        return $this;
     }
 }

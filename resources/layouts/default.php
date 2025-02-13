@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= $title??'' ?></title>
     <link rel="stylesheet" href="<?= base_url('public/favicon.png') ?>">
+    <meta name="csrf-token" content="<?= get_csrf_token(); ?>">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -26,7 +27,10 @@
     </div>
 </nav>
 <div class="ml-4">
-    <?= $this->content ?>
+    <div class="m-100">
+        <?php  get_alerts();?>
+        <?= $content??'' ?>
+    </div>
 </div>
 </body>
 </html>

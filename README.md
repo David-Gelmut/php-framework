@@ -97,6 +97,12 @@
 
 ## Логирование
 
-Для извлечения состояния из любых переменных используется пакет https://symfony.com/doc/current/components/var_dumper.html .
-  
+Для извлечения состояния из любых переменных используется пакет [VarDumper](https://symfony.com/doc/current/components/var_dumper.html).
+
+## Отслеживание ошибок 
+Пакет [filp/whoops](https://packagist.org/packages/filp/whoops)
+
+
+
+
 ## Документация будет дополняться

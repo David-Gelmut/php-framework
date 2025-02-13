@@ -6,7 +6,8 @@ use App\MVC\Model;
 
 class User extends Model
 {
-    protected array $fillable = ['name', 'email', 'password', 'age'];
+  //  protected bool $timestamps = false;
+    protected array $fillable = ['name', 'email', 'password'];
     protected array $rules = [
         'required' => [
             ['name'],

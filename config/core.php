@@ -2,12 +2,14 @@
 
 define("ROOT", dirname(__DIR__));
 
-const WWW = ROOT . '/public';
-const LANG_DIR = ROOT . '/lang';
+
 const APP_DEBUG = false;
 const SITE_URL = 'http://localhost:8000';
+
 const APP = ROOT . '/app';
 const CORE = ROOT . '/core';
+const WWW = ROOT . '/public';
+const LANG_DIR = ROOT . '/lang';
 const VIEWS = ROOT . '/resources';
 const LAYOUTS = ROOT . '/resources/layouts';
 const RESOURCES = ROOT . '/resources';

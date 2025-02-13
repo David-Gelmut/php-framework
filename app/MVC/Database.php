@@ -96,11 +96,4 @@ class Database
     {
         return $this->connection->rollBack();
     }
-
-    /*public function create(string $table, array $data)
-    {
-        $keys = implode(',', array_keys($data));
-        $values = implode(',', array_values($data));
-        $this->query("insert into {$table} ($keys) values ($values)");
-    }*/
 }

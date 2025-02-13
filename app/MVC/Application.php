@@ -2,9 +2,6 @@
 
 namespace App\MVC;
 
-use App\MVC\Route;
-use App\MVC\Route\RouteDispatcher;
-
 class Application
 {
     public static Application $app;
@@ -13,6 +10,7 @@ class Application
     public Response $response;
     public View $view;
     public Database $database;
+    public Session $session;
 
     public function __construct()
     {
@@ -22,16 +20,19 @@ class Application
         $this->route = new Route($this->request, $this->response);
         $this->view = new View('default');
         $this->database = new Database();
+        $this->session = new Session();
+        $this->generateToken();
     }
 
     public function run(): void
     {
         echo $this->route->dispatch();
+    }
 
-
-        /* foreach (Route::getRoutes() as $routeConfiguration) {
-             $routeDispatcher = new RouteDispatcher($routeConfiguration);
-             $routeDispatcher->process();
-         }*/
+    private function generateToken(): void
+    {
+        if (!session()->has('csrf_token')) {
+            session()->set('csrf_token', md5(uniqid(mt_rand(), true)));
+        }
     }
 }
