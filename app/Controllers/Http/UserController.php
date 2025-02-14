@@ -41,7 +41,6 @@ class UserController extends Controller
 
     public function index()
     {
-       dump(1/0);
         $user = new User();
     }
 }

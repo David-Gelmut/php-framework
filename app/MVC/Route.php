@@ -77,6 +77,16 @@ class Route
                         }
                     }
                 }
+
+                if ($route['middleware']) {
+                    foreach ($route['middleware'] as $item) {
+                        $middleware = MIDDLEWARE[$item] ?? '';
+                        if ($middleware) {
+                            (new $middleware)->handle();
+                        }
+                    }
+                }
+
                 foreach ($matches as $k => $v) {
                     if (is_string($k)) {
                         $this->routeParams[$k] = $v;
@@ -97,6 +107,12 @@ class Route
     public function withoutToken(): self
     {
         $this->routes[array_key_last($this->routes)]['token'] = false;
+        return $this;
+    }
+
+    public function middleware(array $middleware): self
+    {
+        $this->routes[array_key_last($this->routes)]['middleware'] = $middleware;
         return $this;
     }
 }

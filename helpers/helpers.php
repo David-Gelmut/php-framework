@@ -86,20 +86,16 @@ function set_validation_class(string $fieldname): string
     return isset($errors[$fieldname]) ? 'border-red-500' : 'border-green-500';
 }
 
-/*function get_csrf_field(): string
-{
-    return '<input type="hidden" name="csrf_token" value="' . session()->get('token') . '">';
-}
-
-function get_csrf_meta(): string
-{
-    return '<meta name="csrf-token" content="' . session()->get('token') . '">';
-}*/
-
 function get_csrf_token(): string
 {
     return session()->get('csrf_token');
 }
+
+function check_auth(): bool
+{
+    return true;
+}
+
 
 function env(string $key)
 {

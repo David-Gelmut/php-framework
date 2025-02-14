@@ -3,7 +3,7 @@
 define("ROOT", dirname(__DIR__));
 
 
-const APP_DEBUG = false;
+const APP_DEBUG = true;
 const SITE_URL = 'http://localhost:8000';
 
 const APP = ROOT . '/app';
@@ -29,4 +29,9 @@ const DB_SETTINGS = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]
+];
+
+const MIDDLEWARE = [
+    'auth' => \App\MVC\Middleware\Auth::class ,
+    'guest' => \App\MVC\Middleware\Guest::class
 ];
