@@ -93,9 +93,23 @@ function get_csrf_token(): string
 
 function check_auth(): bool
 {
-    return true;
+    return \App\MVC\Auth::isAuth();
 }
 
+function logout(): void
+{
+    \App\MVC\Auth::logout();
+}
+
+function get_user(): mixed
+{
+    return \App\MVC\Auth::getUser();
+}
+
+/*function is_auth(): mixed
+{
+    return \App\MVC\Auth::isAuth();
+}*/
 
 function env(string $key)
 {

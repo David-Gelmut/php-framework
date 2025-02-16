@@ -22,6 +22,7 @@ class Application
         $this->database = new Database();
         $this->session = new Session();
         $this->generateToken();
+        Auth::setUser();
     }
 
     public function run(): void

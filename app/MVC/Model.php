@@ -60,7 +60,7 @@ class Model
         }
     }
 
-    protected function getAttributesForm(): array
+    public function getAttributesForm(): array
     {
         return $this->attributes_form;
     }
@@ -73,7 +73,6 @@ class Model
         if (!$data) {
             $data = $this->attributes_form;
         }
-
         if (!$labels) {
             $labels = $this->labels;
         }
@@ -83,6 +82,7 @@ class Model
         $validator = new Validator($data);
         $validator->rules($rules);
         $validator->labels($labels);
+
         if ($validator->validate()) {
             return true;
         } else {

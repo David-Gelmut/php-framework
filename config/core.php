@@ -10,9 +10,9 @@ const APP = ROOT . '/app';
 const CORE = ROOT . '/core';
 const WWW = ROOT . '/public';
 const LANG_DIR = ROOT . '/lang';
-const VIEWS = ROOT . '/resources';
-const LAYOUTS = ROOT . '/resources/layouts';
-const RESOURCES = ROOT . '/resources';
+const VIEWS = ROOT . '/resources/views';
+const LAYOUTS = ROOT . '/resources/views/layouts';
+const RESOURCES = ROOT . '/resources/views';
 const ERROR_LOGS = ROOT . '/tmp/errors/error.log';
 
 const DB_SETTINGS = [

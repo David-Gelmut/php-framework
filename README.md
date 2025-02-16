@@ -10,7 +10,6 @@
 2. Так как проект учебный запускаем на сервере php в папке public :
 
     ```
-    cd public
     php -S localhost:8000
     ```
 
@@ -94,6 +93,7 @@
     ```
     php vendor/bin/phinx rollback -e development
     ```
+ ### !!! Не забываем прописать конфигурацию базы данных в файле phinx.php !!!
 
 ## Логирование
 

@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Http;
 
-use App\MVC\Controller;
+use App\Controllers\Controller;
 use App\MVC\View;
 
 class HomeController extends Controller
