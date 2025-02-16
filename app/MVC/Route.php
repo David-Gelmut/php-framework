@@ -5,7 +5,7 @@ namespace App\MVC;
 class Route
 {
     private array $routes = [];
-    private array $routeParams = [];
+    public array $routeParams = [];
 
     public function __construct(protected Request $request, protected Response $response)
     {
@@ -40,6 +40,21 @@ class Route
         return $this->add($path, $callback, 'POST');
     }
 
+    public function put(string $path, \Closure|array $callback): self
+    {
+        return $this->add($path, $callback, 'PUT');
+    }
+
+    public function patch(string $path, \Closure|array $callback): self
+    {
+        return $this->add($path, $callback, 'PATCH');
+    }
+
+    public function delete(string $path, \Closure|array $callback): self
+    {
+        return $this->add($path, $callback, 'DELETE');
+    }
+
     public function getRoutes(): array
     {
         return $this->routes;
@@ -61,8 +76,6 @@ class Route
 
     private function checkTokenInPostRequest(array $route): void
     {
-
-
         if (request()->isPost()) {
             if ($route['token'] && !$this->checkCsrfToken()) {
                 if (request()->isAjax()) {
@@ -72,8 +85,6 @@ class Route
                     ]);
                     die();
                 } else {
-                    //dump(session()->get('csrf_token'));
-                    //dump($route['token'] );
                     abort('Page expired', 419);
                 }
             }
@@ -86,7 +97,7 @@ class Route
         return $token && $token == session()->get('csrf_token');
     }
 
-    private function handleMiddlewareInRequest(array $route): void
+    private function handleMiddlewaresInRequest(array $route): void
     {
         if ($route['middleware']) {
             foreach ($route['middleware'] as $item) {
@@ -100,24 +111,19 @@ class Route
 
     private function matchRoute($path): array|bool
     {
+        $allowedMethods = [];
         foreach ($this->routes as $route) {
             if (
                 preg_match("#^{$route['path']}$#", "/{$path}", $matches)) {
 
                 if (!in_array($this->request->getMethod(), $route['method'])) {
-                   /*    echo '<pre>';
-                    print_r($_SERVER);
-                    echo '<pre>';*/
-                    if ($_SERVER['HTTP_ACCEPT'] == 'application/json') {
-                        response()->jsonResponse(['status' => 'Error', 'response' => 'Method not allowed'], 405);
-                        abort("Method Not allowed", 405);
-                    }
 
-                    // header("Allow: {$route['method']}");
+                    $allowedMethods = array_merge($allowedMethods, $route['method']);
+                    continue;
 
                 }
 
-                $this->handleMiddlewareInRequest($route);
+                $this->handleMiddlewaresInRequest($route);
                 $this->checkTokenInPostRequest($route);
 
                 foreach ($matches as $k => $v) {
@@ -127,6 +133,15 @@ class Route
                 }
                 return $route;
             }
+        }
+        if ($allowedMethods) {
+
+            header("Allow: " . implode(',', array_unique($allowedMethods)));
+            if ($_SERVER['HTTP_ACCEPT'] == 'application/json') {
+                response()->jsonResponse(['status' => 'Error', 'response' => 'Method not allowed'], 405);
+
+            }
+            abort("Method Not allowed", 405);
         }
         return false;
     }

@@ -65,6 +65,11 @@ class Model
         return $this->attributes_form;
     }
 
+    public function getFillables(): array
+    {
+        return $this->fillable;
+    }
+
     public function validate($rules = [], $data = [], $labels = []): bool
     {
         if (!$rules) {
@@ -155,7 +160,7 @@ class Model
         return db()->getInsertID();
     }
 
-    public function create(array $attributes): int
+    public function create(array $attributes): int|false
     {
         $this->attributes_form = $attributes;
         $this->save();
@@ -173,9 +178,13 @@ class Model
         return $id;
     }
 
-    private function createOrUpdate()
+    public function updateForce(int $id, array $attributes): int
     {
-
+        $fillable = array_flip($this->getFillables());
+        foreach ($fillable as $key => $value) {
+            $fillable[$key] = null;
+        }
+        return $this->update($id, array_merge($fillable, $attributes));
 
     }
 

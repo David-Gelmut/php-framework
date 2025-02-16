@@ -58,7 +58,7 @@ class Request
     public function getData(): array
     {
         $data = [];
-        $requestData = $this->isGet() ? $_GET : $_POST;
+        $requestData = $this->isGet() ? $_GET : $this->getDataMethod();
         foreach ($requestData as $key => $value) {
             if (is_string($value)) {
                 $value = trim($value);
@@ -66,5 +66,18 @@ class Request
             $data[$key] = $value;
         }
         return $data;
+    }
+
+    private function getDataMethod(): array
+    {
+        $_ARRAY = [];
+        parse_str(file_get_contents('php://input'), $_ARRAY);
+        $body = [];
+        if (is_array($_ARRAY)) {
+            foreach ($_ARRAY as $key => $value) {
+                $body[$key] = $value;
+            }
+        }
+        return $body;
     }
 }

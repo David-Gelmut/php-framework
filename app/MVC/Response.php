@@ -20,7 +20,7 @@ class Response
         http_response_code($code);
     }
 
-    public function jsonResponse($data,$code = 200)
+    public function jsonResponse($data, $code = 200): void
     {
         $this->setResponseCode($code);
         header("Content-type: application/json; charset=UTF-8");
