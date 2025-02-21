@@ -7,5 +7,6 @@ route()->get('/logout', [\App\Controllers\Http\AuthController::class, 'logout'])
 route()->post('/login', [\App\Controllers\Http\AuthController::class, 'auth'])->middleware(['guest']);
 route()->get('/register', [\App\Controllers\Http\AuthController::class, 'register'])->middleware(['guest']);
 route()->post('/register', [\App\Controllers\Http\AuthController::class, 'store'])->middleware(['guest']);
+route()->get('/users', [\App\Controllers\Http\UserController::class, 'index']);
 
 //dump(route()->getRoutes());
